@@ -1,0 +1,47 @@
+#include<iostream>
+#include<conio.h>
+#include<vector>
+#include<ctime>
+using namespace std;
+
+//exponential time
+int fib(unsigned int n)
+{
+	if (n < 2) return n;
+	return fib(n - 1) + fib(n - 2);
+}
+
+//polynomial time
+int fib_n(int n)
+{
+	if (n <= 2) return 1;
+	vector<int> dp(n + 1);
+	dp[1] = 1; dp[2] = 1;
+	for (int i = 3; i <= n; i++)
+	{
+		dp[i] = dp[i - 1] + dp[i - 2];
+	}
+	return dp[n];
+}
+
+int main()
+{
+	unsigned int start_time = 0, end_time = 0;
+	unsigned int number = 42;
+
+	//exponential time
+	start_time = clock();
+	cout << fib_n(number);
+	end_time = clock();
+	cout << "\n\ntime: " << end_time - start_time << " milliseconds\n\n\n";
+
+	start_time = end_time = 0;
+
+	//polynomial time
+	start_time = clock();
+	cout << fib(number);
+	end_time = clock();
+	cout << "\n\ntime: " << end_time - start_time << " milliseconds";
+
+	_getch();
+}
